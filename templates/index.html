@@ -14,41 +14,165 @@ Ultimate Portfolio System
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#0f172a;
     color:white;
-    font-family:Arial;
+    font-family:Arial,sans-serif;
 }
 
 header{
     background:#111827;
-    padding:20px;
-    text-align:center;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:2px solid #2563eb;
 }
 
 header h1{
     color:#60a5fa;
 }
 
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#60a5fa;
+}
+
 .container{
     width:90%;
-    max-width:1200px;
+    max-width:1300px;
     margin:auto;
 }
 
 section{
-    padding:60px 0;
+    padding:80px 0;
 }
 
-h2{
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+    flex-wrap:wrap;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h2{
+    font-size:60px;
+    margin-bottom:25px;
     color:#60a5fa;
+}
+
+.hero-text p{
+    color:#cbd5e1;
+    font-size:20px;
+    line-height:1.7;
+}
+
+.hero img{
+    width:350px;
+    border-radius:30px;
+    box-shadow:0 0 30px rgba(96,165,250,0.3);
+}
+
+.button{
+    display:inline-block;
+    margin-top:30px;
+    background:#2563eb;
+    padding:16px 35px;
+    border-radius:14px;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.button:hover{
+    background:#1d4ed8;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+    color:#60a5fa;
+    font-size:42px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#1e293b;
+    border:1px solid #334155;
+    border-radius:25px;
+    padding:25px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 0 25px rgba(96,165,250,0.2);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#60a5fa;
+}
+
+.card p{
+    color:#cbd5e1;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.stat-box{
+    background:#1e293b;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    border:1px solid #334155;
+}
+
+.stat-box h2{
+    font-size:45px;
+    color:#60a5fa;
+    margin-bottom:10px;
 }
 
 form{
     background:#1e293b;
-    padding:30px;
-    border-radius:20px;
+    padding:35px;
+    border-radius:25px;
+    border:1px solid #334155;
 }
 
 input,
@@ -57,46 +181,45 @@ textarea{
     margin-top:15px;
     padding:15px;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     background:#0f172a;
     color:white;
+    font-size:16px;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
 }
 
 button{
     margin-top:20px;
     padding:15px 30px;
-    border:none;
-    border-radius:10px;
     background:#2563eb;
+    border:none;
+    border-radius:12px;
     color:white;
     cursor:pointer;
+    transition:0.3s;
 }
 
-.stats{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+button:hover{
+    background:#1d4ed8;
 }
 
-.stat-box{
-    flex:1;
-    background:#1e293b;
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-}
-
-#users{
+#searchResults{
     display:grid;
     grid-template-columns:
     repeat(auto-fit,minmax(300px,1fr));
     gap:20px;
+    margin-top:30px;
 }
 
 .user-card{
     background:#1e293b;
     padding:25px;
-    border-radius:20px;
+    border-radius:25px;
+    border:1px solid #334155;
 }
 
 .user-card img{
@@ -104,6 +227,47 @@ button{
     height:120px;
     border-radius:50%;
     object-fit:cover;
+    margin-bottom:20px;
+}
+
+.user-card h2{
+    color:#60a5fa;
+    margin-bottom:15px;
+}
+
+.user-card p{
+    margin:8px 0;
+    color:#cbd5e1;
+}
+
+.search-box{
+    display:flex;
+    gap:15px;
+}
+
+footer{
+    background:#111827;
+    margin-top:60px;
+    padding:30px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-text h2{
+    font-size:45px;
+}
+
+.hero img{
+    width:280px;
+}
+
 }
 
 </style>
@@ -115,35 +279,68 @@ button{
 <header>
 
 <h1>
-Ultimate Portfolio System
+Portfolio System
 </h1>
+
+<nav>
+
+<a onclick="scrollToSection('home')">
+Главная
+</a>
+
+<a onclick="scrollToSection('portfolio')">
+Портфолио
+</a>
+
+<a onclick="scrollToSection('statistics')">
+Статистика
+</a>
+
+<a onclick="scrollToSection('search')">
+Поиск
+</a>
+
+</nav>
 
 </header>
 
 <div class="container">
 
-<section>
+<section id="home">
+
+<div class="hero">
+
+<div class="hero-text">
 
 <h2>
-Статистика
+Ultimate Portfolio System
 </h2>
 
-<div class="stats">
+<p>
+Современная платформа для создания
+цифрового IT-портфолио.
+</p>
 
-<div class="stat-box">
-<h1 id="usersCount">0</h1>
-<p>Пользователей</p>
+<p>
+Система поддерживает:
+создание профилей,
+общую статистику,
+поиск пользователей,
+GitHub,
+фото профиля
+и сохранение данных.
+</p>
+
+<div class="button"
+onclick="scrollToSection('portfolio')">
+
+Создать портфолио
+
 </div>
 
-<div class="stat-box">
-<h1 id="viewsCount">0</h1>
-<p>Просмотров</p>
 </div>
 
-<div class="stat-box">
-<h1 id="activeCount">0</h1>
-<p>Активных</p>
-</div>
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png">
 
 </div>
 
@@ -151,13 +348,94 @@ Ultimate Portfolio System
 
 <section>
 
-<h2>
+<h2 class="section-title">
+Возможности системы
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>👤 Профили</h3>
+<p>
+Создание полноценного IT-портфолио.
+</p>
+</div>
+
+<div class="card">
+<h3>🌐 GitHub</h3>
+<p>
+Добавление GitHub профиля.
+</p>
+</div>
+
+<div class="card">
+<h3>🔍 Поиск</h3>
+<p>
+Поиск пользователей по навыкам.
+</p>
+</div>
+
+<div class="card">
+<h3>📊 Статистика</h3>
+<p>
+Общая статистика пользователей.
+</p>
+</div>
+
+<div class="card">
+<h3>💾 База данных</h3>
+<p>
+Сохранение через Flask + SQLite.
+</p>
+</div>
+
+<div class="card">
+<h3>📱 Адаптивность</h3>
+<p>
+Работа на телефонах и ПК.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="statistics">
+
+<h2 class="section-title">
+Статистика сайта
+</h2>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2 id="usersCount">0</h2>
+<p>Пользователей</p>
+</div>
+
+<div class="stat-box">
+<h2 id="viewsCount">0</h2>
+<p>Просмотров</p>
+</div>
+
+<div class="stat-box">
+<h2 id="activeCount">0</h2>
+<p>Активных профилей</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="portfolio">
+
+<h2 class="section-title">
 Создание портфолио
 </h2>
 
 <form>
 
-<input
+<input type="text"
 id="name"
 placeholder="Имя">
 
@@ -165,47 +443,46 @@ placeholder="Имя">
 id="about"
 placeholder="О себе"></textarea>
 
-<input
+<input type="text"
 id="skills"
 placeholder="Навыки">
 
-<input
+<input type="text"
 id="projects"
 placeholder="Проекты">
 
-<input
+<input type="text"
 id="contacts"
 placeholder="Контакты">
 
-<input
+<input type="text"
 id="github"
 placeholder="GitHub">
 
-<input
+<input type="text"
 id="category"
 placeholder="Категория">
 
-<input
+<input type="text"
 id="education"
 placeholder="Образование">
 
-<input
+<input type="text"
 id="experience"
 placeholder="Опыт">
 
-<input
+<input type="text"
 id="achievements"
 placeholder="Достижения">
 
-<input
+<input type="text"
 id="photo"
 placeholder="Ссылка на фото">
 
-<button
-type="button"
+<button type="button"
 onclick="savePortfolio()">
 
-Сохранить
+💾 Сохранить портфолио
 
 </button>
 
@@ -213,35 +490,46 @@ onclick="savePortfolio()">
 
 </section>
 
-<section>
+<section id="search">
 
-<h2>
-Поиск
+<h2 class="section-title">
+Поиск пользователей
 </h2>
 
-<input
+<div class="search-box">
+
+<input type="text"
 id="searchInput"
-placeholder="Введите запрос">
+placeholder="Введите имя, навык или GitHub">
 
 <button onclick="searchUsers()">
 Поиск
 </button>
 
-</section>
+</div>
 
-<section>
-
-<h2>
-Пользователи
-</h2>
-
-<div id="users"></div>
+<div id="searchResults"></div>
 
 </section>
 
 </div>
 
+<footer>
+
+Ultimate Portfolio System © 2026
+
+</footer>
+
 <script>
+
+function scrollToSection(id){
+
+    document.getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
 
 async function savePortfolio(){
 
@@ -294,20 +582,20 @@ async function savePortfolio(){
 
     });
 
-    alert("Портфолио сохранено");
+    alert("Портфолио сохранено!");
 
-    loadUsers();
     loadStats();
+    loadUsers();
 
 }
 
 async function loadStats(){
 
     const response =
-    await fetch("/stats");
+        await fetch("/stats");
 
     const data =
-    await response.json();
+        await response.json();
 
     document.getElementById("usersCount")
     .innerHTML = data.users;
@@ -323,19 +611,19 @@ async function loadStats(){
 async function loadUsers(){
 
     const response =
-    await fetch("/users");
+        await fetch("/users");
 
     const users =
-    await response.json();
+        await response.json();
 
-    const usersDiv =
-    document.getElementById("users");
+    const results =
+        document.getElementById("searchResults");
 
-    usersDiv.innerHTML = "";
+    results.innerHTML = "";
 
     users.forEach(user => {
 
-        usersDiv.innerHTML += `
+        results.innerHTML += `
 
         <div class="user-card">
 
@@ -343,17 +631,15 @@ async function loadUsers(){
 
         <h2>${user.name}</h2>
 
-        <p>${user.about}</p>
-
         <p>🛠 ${user.skills}</p>
 
-        <p>📂 ${user.projects}</p>
+        <p>💼 ${user.category}</p>
 
         <p>📞 ${user.contacts}</p>
 
         <p>🌐 ${user.github}</p>
 
-        <p>💼 ${user.category}</p>
+        <p>👁 Просмотры: ${user.views}</p>
 
         </div>
 
@@ -366,8 +652,7 @@ async function loadUsers(){
 async function searchUsers(){
 
     const query =
-    document.getElementById("searchInput")
-    .value;
+    document.getElementById("searchInput").value;
 
     const response =
     await fetch(`/search/${query}`);
@@ -375,14 +660,14 @@ async function searchUsers(){
     const users =
     await response.json();
 
-    const usersDiv =
-    document.getElementById("users");
+    const results =
+    document.getElementById("searchResults");
 
-    usersDiv.innerHTML = "";
+    results.innerHTML = "";
 
     users.forEach(user => {
 
-        usersDiv.innerHTML += `
+        results.innerHTML += `
 
         <div class="user-card">
 
@@ -390,9 +675,11 @@ async function searchUsers(){
 
         <h2>${user.name}</h2>
 
-        <p>${user.about}</p>
-
         <p>🛠 ${user.skills}</p>
+
+        <p>💼 ${user.category}</p>
+
+        <p>📞 ${user.contacts}</p>
 
         <p>🌐 ${user.github}</p>
 
@@ -404,8 +691,407 @@ async function searchUsers(){
 
 }
 
-loadUsers();
 loadStats();
+loadUsers();
+
+</script>
+
+</body>
+</html>
+
+<div class="card">
+<h3>🔍 Поиск</h3>
+<p>Поиск пользователей по навыкам.</p>
+</div>
+
+<div class="card">
+<h3>📊 Статистика</h3>
+<p>Автоматическая статистика пользователей.</p>
+</div>
+
+<div class="card">
+<h3>💾 Сохранение</h3>
+<p>Данные сохраняются даже после перезагрузки.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="statistics">
+
+<h2 class="section-title">
+Статистика сайта
+</h2>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2 id="usersCount">0</h2>
+<p>Пользователей</p>
+</div>
+
+<div class="stat-box">
+<h2 id="viewsCount">0</h2>
+<p>Просмотров</p>
+</div>
+
+<div class="stat-box">
+<h2 id="activeCount">0</h2>
+<p>Активных профилей</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">
+Поиск пользователей
+</h2>
+
+<div class="search-box">
+
+<input type="text" id="searchInput" placeholder="Введите навык, например Python">
+
+<button onclick="searchUsers()">
+Поиск
+</button>
+
+</div>
+
+<div id="searchResults"></div>
+
+</section>
+
+<section id="portfolio">
+
+<h2 class="section-title">
+Создание портфолио
+</h2>
+
+<form>
+
+<input type="text" id="name" placeholder="Имя">
+
+<textarea id="about" placeholder="О себе"></textarea>
+
+<input type="text" id="skills" placeholder="Навыки">
+
+<input type="text" id="projects" placeholder="Проекты">
+
+<input type="text" id="contacts" placeholder="Контакты">
+
+<input type="text" id="github" placeholder="GitHub">
+
+<input type="text" id="category" placeholder="Категория">
+
+<input type="text" id="education" placeholder="Образование">
+
+<input type="text" id="experience" placeholder="Опыт">
+
+<input type="text" id="achievements" placeholder="Достижения">
+
+<input type="file" id="photo">
+
+<button type="button" onclick="savePortfolio()">
+💾 Сохранить портфолио
+</button>
+
+<button type="button" onclick="deletePortfolio()">
+🗑 Удалить портфолио
+</button>
+
+</form>
+
+<div class="profile-card" id="profileCard" style="display:none;">
+
+<img id="profileImage">
+
+<h2 id="profileName"></h2>
+
+<p id="profileAbout"></p>
+<p id="profileSkills"></p>
+<p id="profileProjects"></p>
+<p id="profileContacts"></p>
+<p id="profileGithub"></p>
+<p id="profileCategory"></p>
+<p id="profileEducation"></p>
+<p id="profileExperience"></p>
+<p id="profileAchievements"></p>
+<p id="profileViews"></p>
+
+</div>
+
+</section>
+
+<section id="contactsSection">
+
+<h2 class="section-title">
+Контакты проекта
+</h2>
+
+<div class="card">
+
+<p>
+📧 Email: batomunkuevtamir@yahoo.com
+</p>
+
+<p>
+🌐 GitHub: github.com/Doublewokk
+</p>
+
+<p>
+💬 Telegram: @doublewok
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+Ultimate Portfolio System © 2026
+</footer>
+
+<script>
+
+let portfolios = JSON.parse(localStorage.getItem("portfolios")) || [];
+let views = Number(localStorage.getItem("views")) || 0;
+
+function scrollToSection(id){
+
+    document.getElementById(id).scrollIntoView({
+        behavior:'smooth'
+    });
+
+}
+
+function updateStats(){
+
+    document.getElementById("usersCount").innerHTML = portfolios.length;
+
+    document.getElementById("viewsCount").innerHTML = views;
+
+    document.getElementById("activeCount").innerHTML = portfolios.length;
+
+}
+
+function savePortfolio(){
+
+    const name = document.getElementById("name").value;
+    const about = document.getElementById("about").value;
+    const skills = document.getElementById("skills").value;
+    const projects = document.getElementById("projects").value;
+    const contacts = document.getElementById("contacts").value;
+    const github = document.getElementById("github").value;
+    const category = document.getElementById("category").value;
+    const education = document.getElementById("education").value;
+    const experience = document.getElementById("experience").value;
+    const achievements = document.getElementById("achievements").value;
+
+    const file = document.getElementById("photo").files[0];
+
+    if(name === ""){
+        alert("Введите имя");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        const portfolio = {
+            name,
+            about,
+            skills,
+            projects,
+            contacts,
+            github,
+            category,
+            education,
+            experience,
+            achievements,
+            photo:e.target.result,
+            views:0
+        };
+
+        portfolios.push(portfolio);
+
+        localStorage.setItem(
+            "portfolios",
+            JSON.stringify(portfolios)
+        );
+
+        showPortfolio(portfolio);
+
+        updateStats();
+
+        alert("Портфолио сохранено!");
+
+    }
+
+    if(file){
+        reader.readAsDataURL(file);
+    }
+    else{
+
+        const portfolio = {
+            name,
+            about,
+            skills,
+            projects,
+            contacts,
+            github,
+            category,
+            education,
+            experience,
+            achievements,
+            photo:"https://cdn-icons-png.flaticon.com/512/149/149071.png",
+            views:0
+        };
+
+        portfolios.push(portfolio);
+
+        localStorage.setItem(
+            "portfolios",
+            JSON.stringify(portfolios)
+        );
+
+        showPortfolio(portfolio);
+
+        updateStats();
+
+        alert("Портфолио сохранено!");
+
+    }
+
+}
+
+function showPortfolio(portfolio){
+
+    document.getElementById("profileCard").style.display = "block";
+
+    document.getElementById("profileImage").src = portfolio.photo;
+
+    document.getElementById("profileName").innerHTML =
+        "👤 " + portfolio.name;
+
+    document.getElementById("profileAbout").innerHTML =
+        "📝 О себе: " + portfolio.about;
+
+    document.getElementById("profileSkills").innerHTML =
+        "🛠 Навыки: " + portfolio.skills;
+
+    document.getElementById("profileProjects").innerHTML =
+        "📂 Проекты: " + portfolio.projects;
+
+    document.getElementById("profileContacts").innerHTML =
+        "📞 Контакты: " + portfolio.contacts;
+
+    document.getElementById("profileGithub").innerHTML =
+        "🌐 GitHub: " + portfolio.github;
+
+    document.getElementById("profileCategory").innerHTML =
+        "💼 Категория: " + portfolio.category;
+
+    document.getElementById("profileEducation").innerHTML =
+        "🎓 Образование: " + portfolio.education;
+
+    document.getElementById("profileExperience").innerHTML =
+        "💻 Опыт: " + portfolio.experience;
+
+    document.getElementById("profileAchievements").innerHTML =
+        "🏆 Достижения: " + portfolio.achievements;
+
+    portfolio.views += 1;
+
+    views += 1;
+
+    localStorage.setItem("views", views);
+
+    localStorage.setItem(
+        "portfolios",
+        JSON.stringify(portfolios)
+    );
+
+    document.getElementById("profileViews").innerHTML =
+        "👁 Просмотры: " + portfolio.views;
+
+    updateStats();
+
+}
+
+function searchUsers(){
+
+    const query = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const results = document.getElementById("searchResults");
+
+    results.innerHTML = "";
+
+    const filtered = portfolios.filter(portfolio =>
+        portfolio.skills.toLowerCase().includes(query)
+    );
+
+    if(filtered.length === 0){
+
+        results.innerHTML =
+            "❌ Пользователи не найдены";
+
+        return;
+    }
+
+    filtered.forEach(portfolio => {
+
+        results.innerHTML += `
+
+        <div class="search-user">
+
+        <h3>👤 ${portfolio.name}</h3>
+
+        <p>🛠 ${portfolio.skills}</p>
+
+        <p>💼 ${portfolio.category}</p>
+
+        <p>🌐 ${portfolio.github}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function deletePortfolio(){
+
+    localStorage.removeItem("portfolios");
+
+    portfolios = [];
+
+    document.getElementById("profileCard").style.display = "none";
+
+    updateStats();
+
+    alert("Портфолио удалено");
+
+}
+
+window.onload = function(){
+
+    updateStats();
+
+    if(portfolios.length > 0){
+        showPortfolio(portfolios[0]);
+    }
+
+}
 
 </script>
 
