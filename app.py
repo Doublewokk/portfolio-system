@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+rom flask import Flask, render_template, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -233,5 +233,5 @@ def stats():
 # RUN
 # =========================================
 
-if name == "main":
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
