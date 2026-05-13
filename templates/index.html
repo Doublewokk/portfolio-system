@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Portfolio System</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Ultimate Portfolio System
+</title>
 
 <style>
 
@@ -25,10 +32,10 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    border-bottom:2px solid #2563eb;
     position:sticky;
     top:0;
     z-index:100;
+    border-bottom:2px solid #2563eb;
 }
 
 header h1{
@@ -37,14 +44,12 @@ header h1{
 
 nav{
     display:flex;
-    gap:20px;
+    gap:25px;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    transition:0.3s;
     cursor:pointer;
+    transition:0.3s;
 }
 
 nav a:hover{
@@ -75,30 +80,30 @@ section{
 
 .hero-text h2{
     font-size:60px;
-    margin-bottom:20px;
+    margin-bottom:25px;
+    color:#60a5fa;
 }
 
 .hero-text p{
+    color:#cbd5e1;
     font-size:20px;
     line-height:1.7;
-    color:#cbd5e1;
 }
 
 .hero img{
-    width:380px;
-    border-radius:25px;
-    box-shadow:0 0 35px rgba(37,99,235,0.5);
+    width:350px;
+    border-radius:30px;
+    box-shadow:0 0 30px rgba(96,165,250,0.3);
 }
 
 .button{
     display:inline-block;
-    margin-top:25px;
+    margin-top:30px;
     background:#2563eb;
-    padding:15px 35px;
-    border-radius:12px;
-    text-decoration:none;
-    color:white;
+    padding:16px 35px;
+    border-radius:14px;
     transition:0.3s;
+    cursor:pointer;
 }
 
 .button:hover{
@@ -108,27 +113,28 @@ section{
 .section-title{
     text-align:center;
     margin-bottom:40px;
-    font-size:40px;
     color:#60a5fa;
+    font-size:42px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
 
 .card{
     background:#1e293b;
     border:1px solid #334155;
-    border-radius:20px;
+    border-radius:25px;
     padding:25px;
     transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 20px rgba(96,165,250,0.3);
+    transform:translateY(-7px);
+    box-shadow:0 0 25px rgba(96,165,250,0.2);
 }
 
 .card h3{
@@ -143,29 +149,30 @@ section{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
 }
 
 .stat-box{
     background:#1e293b;
-    padding:30px;
-    border-radius:20px;
+    border-radius:25px;
+    padding:35px;
     text-align:center;
     border:1px solid #334155;
 }
 
 .stat-box h2{
+    font-size:45px;
     color:#60a5fa;
-    font-size:40px;
     margin-bottom:10px;
 }
 
 form{
     background:#1e293b;
-    border:1px solid #334155;
     padding:35px;
     border-radius:25px;
+    border:1px solid #334155;
 }
 
 input,
@@ -181,97 +188,118 @@ textarea{
 }
 
 textarea{
-    resize:vertical;
     min-height:120px;
+    resize:vertical;
 }
 
 button{
     margin-top:20px;
+    padding:15px 30px;
     background:#2563eb;
     border:none;
-    padding:15px 30px;
     border-radius:12px;
     color:white;
     cursor:pointer;
     transition:0.3s;
-    font-size:16px;
 }
 
 button:hover{
     background:#1d4ed8;
 }
 
-.profile-card{
-    background:#1e293b;
-    border:1px solid #334155;
-    border-radius:25px;
-    padding:30px;
-    margin-top:40px;
+#searchResults{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+    margin-top:30px;
 }
 
-.profile-card img{
-    width:180px;
-    height:180px;
+.user-card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:25px;
+    border:1px solid #334155;
+}
+
+.user-card img{
+    width:120px;
+    height:120px;
     border-radius:50%;
     object-fit:cover;
     margin-bottom:20px;
 }
 
-.profile-card h2{
+.user-card h2{
     color:#60a5fa;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
-.profile-card p{
-    margin:10px 0;
+.user-card p{
+    margin:8px 0;
     color:#cbd5e1;
 }
 
 .search-box{
     display:flex;
     gap:15px;
-    margin-bottom:30px;
-}
-
-.search-box input{
-    margin-top:0;
-}
-
-#searchResults{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-}
-
-.search-user{
-    background:#1e293b;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid #334155;
 }
 
 footer{
-    margin-top:60px;
     background:#111827;
+    margin-top:60px;
     padding:30px;
     text-align:center;
     color:#94a3b8;
 }
 
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-text h2{
+    font-size:45px;
+}
+
+.hero img{
+    width:280px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<h1>Portfolio System</h1>
+<h1>
+Portfolio System
+</h1>
 
 <nav>
-    <a onclick="scrollToSection('home')">Главная</a>
-    <a onclick="scrollToSection('portfolio')">Портфолио</a>
-    <a onclick="scrollToSection('statistics')">Статистика</a>
-    <a onclick="scrollToSection('contactsSection')">Контакты</a>
+
+<a onclick="scrollToSection('home')">
+Главная
+</a>
+
+<a onclick="scrollToSection('portfolio')">
+Портфолио
+</a>
+
+<a onclick="scrollToSection('statistics')">
+Статистика
+</a>
+
+<a onclick="scrollToSection('search')">
+Поиск
+</a>
+
 </nav>
 
 </header>
@@ -284,22 +312,31 @@ footer{
 
 <div class="hero-text">
 
-<h2>Ultimate Portfolio System</h2>
+<h2>
+Ultimate Portfolio System
+</h2>
 
 <p>
-Полноценная система цифровых портфолио
-для школьников, студентов и IT-разработчиков.
+Современная платформа для создания
+цифрового IT-портфолио.
 </p>
 
 <p>
-Проект поддерживает создание профилей,
-поиск пользователей, сохранение данных,
-статистику и загрузку фотографий.
+Система поддерживает:
+создание профилей,
+общую статистику,
+поиск пользователей,
+GitHub,
+фото профиля
+и сохранение данных.
 </p>
 
-<a class="button" onclick="scrollToSection('portfolio')">
+<div class="button"
+onclick="scrollToSection('portfolio')">
+
 Создать портфолио
-</a>
+
+</div>
 
 </div>
 
@@ -312,25 +349,355 @@ footer{
 <section>
 
 <h2 class="section-title">
-Возможности проекта
+Возможности системы
 </h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>👤 Портфолио</h3>
-<p>Создание полноценного профиля пользователя.</p>
-</div>
-
-<div class="card">
-<h3>🖼 Фото</h3>
-<p>Поддержка загрузки фотографии профиля.</p>
+<h3>👤 Профили</h3>
+<p>
+Создание полноценного IT-портфолио.
+</p>
 </div>
 
 <div class="card">
 <h3>🌐 GitHub</h3>
-<p>Добавление ссылки на GitHub.</p>
+<p>
+Добавление GitHub профиля.
+</p>
 </div>
+
+<div class="card">
+<h3>🔍 Поиск</h3>
+<p>
+Поиск пользователей по навыкам.
+</p>
+</div>
+
+<div class="card">
+<h3>📊 Статистика</h3>
+<p>
+Общая статистика пользователей.
+</p>
+</div>
+
+<div class="card">
+<h3>💾 База данных</h3>
+<p>
+Сохранение через Flask + SQLite.
+</p>
+</div>
+
+<div class="card">
+<h3>📱 Адаптивность</h3>
+<p>
+Работа на телефонах и ПК.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="statistics">
+
+<h2 class="section-title">
+Статистика сайта
+</h2>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2 id="usersCount">0</h2>
+<p>Пользователей</p>
+</div>
+
+<div class="stat-box">
+<h2 id="viewsCount">0</h2>
+<p>Просмотров</p>
+</div>
+
+<div class="stat-box">
+<h2 id="activeCount">0</h2>
+<p>Активных профилей</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="portfolio">
+
+<h2 class="section-title">
+Создание портфолио
+</h2>
+
+<form>
+
+<input type="text"
+id="name"
+placeholder="Имя">
+
+<textarea
+id="about"
+placeholder="О себе"></textarea>
+
+<input type="text"
+id="skills"
+placeholder="Навыки">
+
+<input type="text"
+id="projects"
+placeholder="Проекты">
+
+<input type="text"
+id="contacts"
+placeholder="Контакты">
+
+<input type="text"
+id="github"
+placeholder="GitHub">
+
+<input type="text"
+id="category"
+placeholder="Категория">
+
+<input type="text"
+id="education"
+placeholder="Образование">
+
+<input type="text"
+id="experience"
+placeholder="Опыт">
+
+<input type="text"
+id="achievements"
+placeholder="Достижения">
+
+<input type="text"
+id="photo"
+placeholder="Ссылка на фото">
+
+<button type="button"
+onclick="savePortfolio()">
+
+💾 Сохранить портфолио
+
+</button>
+
+</form>
+
+</section>
+
+<section id="search">
+
+<h2 class="section-title">
+Поиск пользователей
+</h2>
+
+<div class="search-box">
+
+<input type="text"
+id="searchInput"
+placeholder="Введите имя, навык или GitHub">
+
+<button onclick="searchUsers()">
+Поиск
+</button>
+
+</div>
+
+<div id="searchResults"></div>
+
+</section>
+
+</div>
+
+<footer>
+
+Ultimate Portfolio System © 2026
+
+</footer>
+
+<script>
+
+function scrollToSection(id){
+
+    document.getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+async function savePortfolio(){
+
+    const portfolio = {
+
+        name:
+        document.getElementById("name").value,
+
+        about:
+        document.getElementById("about").value,
+
+        skills:
+        document.getElementById("skills").value,
+
+        projects:
+        document.getElementById("projects").value,
+
+        contacts:
+        document.getElementById("contacts").value,
+
+        github:
+        document.getElementById("github").value,
+
+        category:
+        document.getElementById("category").value,
+
+        education:
+        document.getElementById("education").value,
+
+        experience:
+        document.getElementById("experience").value,
+
+        achievements:
+        document.getElementById("achievements").value,
+
+        photo:
+        document.getElementById("photo").value
+
+    };
+
+    await fetch("/save", {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(portfolio)
+
+    });
+
+    alert("Портфолио сохранено!");
+
+    loadStats();
+    loadUsers();
+
+}
+
+async function loadStats(){
+
+    const response =
+        await fetch("/stats");
+
+    const data =
+        await response.json();
+
+    document.getElementById("usersCount")
+    .innerHTML = data.users;
+
+    document.getElementById("viewsCount")
+    .innerHTML = data.views;
+
+    document.getElementById("activeCount")
+    .innerHTML = data.active;
+
+}
+
+async function loadUsers(){
+
+    const response =
+        await fetch("/users");
+
+    const users =
+        await response.json();
+
+    const results =
+        document.getElementById("searchResults");
+
+    results.innerHTML = "";
+
+    users.forEach(user => {
+
+        results.innerHTML += `
+
+        <div class="user-card">
+
+        <img src="${user.photo}">
+
+        <h2>${user.name}</h2>
+
+        <p>🛠 ${user.skills}</p>
+
+        <p>💼 ${user.category}</p>
+
+        <p>📞 ${user.contacts}</p>
+
+        <p>🌐 ${user.github}</p>
+
+        <p>👁 Просмотры: ${user.views}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+async function searchUsers(){
+
+    const query =
+    document.getElementById("searchInput").value;
+
+    const response =
+    await fetch(`/search/${query}`);
+
+    const users =
+    await response.json();
+
+    const results =
+    document.getElementById("searchResults");
+
+    results.innerHTML = "";
+
+    users.forEach(user => {
+
+        results.innerHTML += `
+
+        <div class="user-card">
+
+        <img src="${user.photo}">
+
+        <h2>${user.name}</h2>
+
+        <p>🛠 ${user.skills}</p>
+
+        <p>💼 ${user.category}</p>
+
+        <p>📞 ${user.contacts}</p>
+
+        <p>🌐 ${user.github}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+loadStats();
+loadUsers();
+
+</script>
+
+</body>
+</html>
 
 <div class="card">
 <h3>🔍 Поиск</h3>
