@@ -1,23 +1,21 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(name)
 
-DATABASE = "database.db"
+# =========================================
+# DATABASE
+# =========================================
 
-def connect_db():
+conn = sqlite3.connect(
+    "portfolio.db",
+    check_same_thread=False
+)
 
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-
-    return conn
-
-conn = connect_db()
 cursor = conn.cursor()
 
 cursor.execute("""
-
-CREATE TABLE IF NOT EXISTS portfolios(
+CREATE TABLE IF NOT EXISTS users (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -34,29 +32,32 @@ CREATE TABLE IF NOT EXISTS portfolios(
     photo TEXT,
 
     views INTEGER DEFAULT 0
-
 )
-
 """)
 
 conn.commit()
+
+# =========================================
+# HOME
+# =========================================
 
 @app.route("/")
 def home():
 
     return render_template("index.html")
 
+# =========================================
+# SAVE PORTFOLIO
+# =========================================
+
 @app.route("/save", methods=["POST"])
 def save():
 
     data = request.json
 
-    conn = connect_db()
-    cursor = conn.cursor()
-
     cursor.execute("""
 
-    INSERT INTO portfolios(
+    INSERT INTO users (
 
         name,
         about,
@@ -93,73 +94,79 @@ def save():
     conn.commit()
 
     return jsonify({
-        "status":"success"
+        "message":"saved"
     })
+
+# =========================================
+# GET USERS
+# =========================================
 
 @app.route("/users")
 def users():
 
-    conn = connect_db()
-    cursor = conn.cursor()
-
     cursor.execute("""
-    SELECT * FROM portfolios
-    ORDER BY id DESC
+
+    SELECT
+        id,
+        name,
+        skills,
+        github,
+        category,
+        contacts,
+        views,
+        photo
+
+    FROM users
+
     """)
 
-    users = [
-        dict(row)
-        for row in cursor.fetchall()
-    ]
+    users = cursor.fetchall()
 
-    return jsonify(users)
+    result = []
 
-@app.route("/stats")
-def stats():
+    for user in users:
 
-    conn = connect_db()
-    cursor = conn.cursor()
+        result.append({
 
-    cursor.execute("""
-    SELECT COUNT(*) FROM portfolios
-    """)
+            "id":user[0],
+            "name":user[1],
+            "skills":user[2],
+            "github":user[3],
+            "category":user[4],
+            "contacts":user[5],
+            "views":user[6],
+            "photo":user[7]
 
-    users = cursor.fetchone()[0]
+        })
 
-    cursor.execute("""
-    SELECT SUM(views) FROM portfolios
-    """)
+    return jsonify(result)
 
-    views = cursor.fetchone()[0]
-
-    if views is None:
-        views = 0
-
-    return jsonify({
-
-        "users":users,
-        "views":views,
-        "active":users
-
-    })
+# =========================================
+# SEARCH USERS
+# =========================================
 
 @app.route("/search/<query>")
 def search(query):
 
-    conn = connect_db()
-    cursor = conn.cursor()
-
     cursor.execute("""
 
-    SELECT * FROM portfolios
+    SELECT
+        name,
+        skills,
+        github,
+        category,
+        contacts,
+        photo
+
+    FROM users
 
     WHERE
 
-    name LIKE ?
-    OR skills LIKE ?
-    OR contacts LIKE ?
-    OR github LIKE ?
-    OR category LIKE ?
+        name LIKE ?
+        OR skills LIKE ?
+        OR contacts LIKE ?
+        OR github LIKE ?
+        OR category LIKE ?
 
     """, (
 
@@ -171,13 +178,60 @@ def search(query):
 
     ))
 
-    users = [
-        dict(row)
-        for row in cursor.fetchall()
-    ]
+    users = cursor.fetchall()
 
-    return jsonify(users)
+    result = []
 
-if __name__ == "__main__":
+    for user in users:
 
-    app.run(debug=True)
+        result.append({
+
+            "name":user[0],
+            "skills":user[1],
+            "github":user[2],
+            "category":user[3],
+            "contacts":user[4],
+            "photo":user[5]
+
+        })
+
+    return jsonify(result)
+
+# =========================================
+# STATS
+# =========================================
+
+@app.route("/stats")
+def stats():
+
+    cursor.execute("""
+    SELECT COUNT(*)
+    FROM users
+    """)
+
+    users_count = cursor.fetchone()[0]
+
+    cursor.execute("""
+    SELECT SUM(views)
+    FROM users
+    """)
+
+    views = cursor.fetchone()[0]
+
+    if views is None:
+        views = 0
+
+    return jsonify({
+
+        "users":users_count,
+        "views":views,
+        "active":users_count
+
+    })
+
+# =========================================
+# RUN
+# =========================================
+
+if name == "main":
+    app.run(host="0.0.0.0", port=5000)
